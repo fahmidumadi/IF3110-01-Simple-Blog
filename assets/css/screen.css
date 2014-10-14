@@ -225,18 +225,20 @@ div.cover > img {
 }
 /* Header */
 .art-header {
-  height: 900px;
   /* Background image is defined in the post */
   background-position: top center;
   background-attachment: fixed;
-  overflow: hidden;
+  margin-bottom: 0px;
 }
 /* Contains the time, title and subtitle for an article */
 .art-header-inner {
-  position: fixed;
-  top: 300px;
+  /* position: relative;
+  top: 300px; */
   left: 50%;
-  margin-left: -490px;
+  margin-top: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px;
 }
 .art-time,
 .art-title,
@@ -250,7 +252,7 @@ div.cover > img {
   letter-spacing: 4px;
 }
 .art-title {
-  font-size: 100px;
+  font-size: 75px;
   line-height: .9;
   letter-spacing: -2px;
   width: 100%;
@@ -273,6 +275,7 @@ div.cover > img {
 
 /* Body */
 .art-body {
+  margin-top: -100px;
   position: relative;
   width: 100%;
   background: #fff;

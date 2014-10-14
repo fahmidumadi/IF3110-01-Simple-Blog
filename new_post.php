@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="Simple Blog">
 
 <link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
-<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico"/>
 
 <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-<title>Simple Blog | Tambah Post</title>
+<title>Dumadi's Blog | Tambah Post</title>
 
 
 </head>
@@ -38,37 +38,85 @@
 <div class="wrapper">
 
 <nav class="nav">
-    <a style="border:none;" id="logo" href="index.html"><h1>Simple<span>-</span>Blog</h1></a>
+    <a style="border:none;" id="logo" href="index.php"><h1>Simple<span>-</span>Blog</h1></a>
     <ul class="nav-primary">
-        <li><a href="new_post.html">+ Tambah Post</a></li>
+        <li><a href="new_post.php">+ Tambah Post</a></li>
     </ul>
 </nav>
 
 <article class="art simple post">
     
-    
-    <h2 class="art-title" style="margin-bottom:40px">-</h2>
+    <header class="art-header">
+        <div class="art-header-inner" >
+            <h2 class="art-title" style="font-size:50px">Tambah Post</h2>
+        </div>
+    </header>
 
     <div class="art-body">
         <div class="art-body-inner">
-            <h2>Tambah Post</h2>
-
             <div id="contact-area">
-                <form method="post" action="#">
+                <form name="formtambah" method="post" action="tambah_post.php" onsubmit="return checkDate()">
                     <label for="Judul">Judul:</label>
                     <input type="text" name="Judul" id="Judul">
 
                     <label for="Tanggal">Tanggal:</label>
-                    <input type="text" name="Tanggal" id="Tanggal">
+                    <input type="text" name="Tanggal" id="Tanggal" placeholder="DD/MM/YYYY">
                     
                     <label for="Konten">Konten:</label><br>
                     <textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
 
-                    <input type="submit" name="submit" value="Simpan" class="submit-button">
+                    <input type="submit" name="submit" value="Tambah" class="submit-button">
                 </form>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+    function IsKabisat(yy){
+        if(((yy % 4 == 0) && (yy % 100 != 0)) || (yy % 400 == 0))
+            return true;
+        else return false;
+    }
+    function checkDate(){
+        var EnteredDate = document.getElementById("Tanggal").value;
+        var date = EnteredDate.substring(0,2);
+        var month = EnteredDate.substring(3,5);
+        var year = EnteredDate.substring(6,10);
+        var IsValid = false;
+        if((year>1000) && (month>0) && (month<=12) && (date>0)){
+            if(month==2){
+                if(IsKabisat(year) && (date <= 29)){
+                    IsValid = true;
+                }
+                else if(!IsKabisat(year) && (date <=28)){
+                    IsValid = true;
+                }
+            }
+            else if(((month==1)||(month==3)||(month==5)||(month==7)||(month==8)||(month==10)||(month==12)) &&(date <=31)){
+                IsValid = true;
+            }
+            else if (date<=30){
+                IsValid = true;
+            }
+        }
+        if(IsValid){
+            var myDate= new Date(year, month-1, date);
+            var today = new Date();
+            today.setDate(today.getDate()-1);
+
+            if(myDate<today){
+                alert("Tanggal yang dimasukkan sudah terlewat");
+                return false;
+            }
+            else{
+                document.formtambah.Tanggal.value=year+"-"+month+"-"+date;
+            }    
+        }
+        else{
+            alert("Tanggal yang dimasukkan tidak valid");
+            return false;
+        }
+    }   
+    </script>
 
 </article>
 
@@ -77,24 +125,13 @@
     <!-- <div class="footer-nav"><p></p></div> -->
     <div class="psi">&Psi;</div>
     <aside class="offsite-links">
-        Asisten IF3110 /
-        <a class="rss-link" href="#rss">RSS</a> /
-        <br>
-        <a class="twitter-link" href="http://twitter.com/YoGiiSinaga">Yogi</a> /
-        <a class="twitter-link" href="http://twitter.com/sonnylazuardi">Sonny</a> /
-        <a class="twitter-link" href="http://twitter.com/fathanpranaya">Fathan</a> /
-        <br>
-        <a class="twitter-link" href="#">Renusa</a> /
-        <a class="twitter-link" href="#">Kelvin</a> /
-        <a class="twitter-link" href="#">Yanuar</a> /
-        
+        <a class="twitter-link" href="http://twitter.com/fdumadi">Fahmi Dumadi</a>
+        <br>13512047
     </aside>
 </footer>
 
 </div>
 
-<script type="text/javascript" src="assets/js/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/fittext.js"></script>
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript" src="assets/js/respond.min.js"></script>
 <script type="text/javascript">
